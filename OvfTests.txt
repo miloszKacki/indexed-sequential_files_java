@@ -1,0 +1,65 @@
+OvfArea overflow = new OvfArea("testfile.bin");
+
+        int testSampleSize = 4000; //chokes above 4000
+
+        System.out.println("========First test stage========");
+
+        long[] testOffsets = new long[testSampleSize];
+        RecordRow[] testRows = new RecordRow[testSampleSize];
+
+        for(int i=0;i<testSampleSize;i++){
+            testRows[i] = RecordRow.randomRecRow();
+            testOffsets[i] = overflow.AppendRecRow(testRows[i]);
+        }
+
+        for(int i=0;i<testSampleSize;i++){
+            RecordRow tmpRow = RecordRow.randomRecRow();
+            overflow.getRecordRow(tmpRow,testOffsets[i]);
+            if(!testRows[i].equals(tmpRow)) System.out.println("test Failed");
+        }
+
+        System.out.println("========Second test stage========");
+        overflow.close();
+        overflow = new OvfArea("testfile.bin");
+
+        RecordRow tmpRow = RecordRow.randomRecRow();
+        long off = overflow.AppendRecRow(tmpRow);
+
+        int[] testKeys = new int[testSampleSize];
+
+//        overflow.printToConsole();
+//        System.out.println("");
+
+        for(int i=0;i<testSampleSize;i++){
+            testRows[i] = RecordRow.randomRecRow();
+            testKeys[i] = testRows[i].record.getKey();
+            overflow.PlaceAtTheOffset(testRows[i],off);
+
+
+//            System.out.println("");
+//            System.out.println("iter "+i);
+//            System.out.println(testRows[i]);
+//            overflow.printToConsole();
+        }
+
+        //overflow.printToConsole();
+        System.out.println("Second test passed: "+overflow.checkIfValidChain(off));
+
+        System.out.println("========Third test stage========");
+
+
+        //overflow.printToConsole();
+        System.out.println("");
+
+        for(int i=0;i<testSampleSize;i++){
+            //System.out.println("Looking for: "+testRows[i]);
+            if(!overflow.getRecordRow(tmpRow,off,testKeys[i]))
+                System.out.println("test Failed. Row not found");
+            if (!tmpRow.record.equals(testRows[i].record)) {
+                System.out.println("test Failed. Wrong record : " + testRows[i]);
+            }
+//            System.out.println("");
+//            System.out.println("iter "+i);
+//            System.out.println(testRows[i]);
+//            overflow.printToConsole();
+        }

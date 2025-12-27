@@ -1,0 +1,18 @@
+//        IdxSeqFile myFile = new IdxSeqFile("/testIdxSeqFile");
+//
+//        int testSampleSize = 20;
+//
+//        for(int i=0;i<testSampleSize;i++){
+//            myFile.appendToIdxs(i*10+3);
+//        }
+//
+//        Random testRand = new Random(424200);
+//
+//
+//        System.out.println(myFile.indexes);
+//        for(int each : myFile.idxSaveBuffer)System.out.println(each);
+//
+//        System.out.println("Key : Page");
+//        for(int i=1;i<testSampleSize*20+3;i++){
+//            System.out.println(i+" : "+ myFile.findPageIndexByKey(i));
+//        }

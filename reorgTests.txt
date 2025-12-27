@@ -1,0 +1,64 @@
+
+
+        IdxSeqFile myFile = new IdxSeqFile("/testIdxSeqFile");
+
+        int testSampleSize = 2000;
+        ArrayList<ParRecord> recordsInFile = new ArrayList<>();
+
+
+        for(int i=1;i<testSampleSize+1;i++){
+            ParRecord tmpRecord = new ParRecord(i*10,5,5,0.5f);
+            if(!myFile.saveRecord(tmpRecord))
+                recordsInFile.add(tmpRecord);
+        }
+
+
+
+        System.out.println("==== File created and reorganised ====");
+        myFile.reorganise();
+        myFile.printToConsole();
+
+        Random rand = new Random(77777);
+
+        for(int i=1;i<testSampleSize+1;i++){
+            ParRecord tmpRecord = new ParRecord((Math.abs(rand.nextInt())%(testSampleSize*20))+1,5,5,0.5f);
+            if(myFile.saveRecord(tmpRecord))
+               recordsInFile.add(tmpRecord);
+        }
+
+        System.out.println("============ After First addition ============");
+        myFile.printToConsole();
+        myFile.reorganise();
+        System.out.println("============ Reorganised: ============");
+        myFile.printToConsole();
+
+
+        for(int i=1;i<testSampleSize+1;i++){
+            ParRecord tmpRecord = new ParRecord((Math.abs(rand.nextInt())%(testSampleSize*20))+1,5,5,0.5f);
+            if(myFile.saveRecord(tmpRecord))
+                recordsInFile.add(tmpRecord);
+        }
+
+        ParRecord tmpRecord = new ParRecord(1,5,5,0.5f);
+        if(myFile.saveRecord(tmpRecord))
+            recordsInFile.add(tmpRecord);
+        tmpRecord = new ParRecord(2,5,5,0.5f);
+        if(myFile.saveRecord(tmpRecord))
+            recordsInFile.add(tmpRecord);
+
+        System.out.println("============ After Second addition ============");
+        myFile.printToConsole();
+        myFile.reorganise();
+        System.out.println("============ Reorganised: ============");
+        myFile.printToConsole();
+
+
+        System.out.println("============ Are all added records present? ============");
+
+        for(ParRecord each:recordsInFile){
+            RecordRow tmpRow = RecordRow.randomRecRow();
+            if(!myFile.getRecordByKey(each.getKey(),tmpRow))
+                System.out.println("Failed to find "+each+"! :((");
+//            if(each.equals(tmpRow.record))
+//                System.out.println("Found "+each+"!");
+        }
