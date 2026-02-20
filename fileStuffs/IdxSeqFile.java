@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class IdxSeqFile {
     public static final int pageSize = 100;
-    public static int alphaB = 2;
+    public static int alphaB = 4;
     public static float acceptableOvfProportion = 2.0f;
     private PrimArea primary;
     //private RecTableFile primary;
