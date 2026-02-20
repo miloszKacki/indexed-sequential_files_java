@@ -17,6 +17,7 @@ public class OvfArea {
 
     //returns true if row placed successfully
     public boolean PlaceAtTheOffset(RecordRow newRecRow, long offset){
+
         if(offset == guardOffset){
             RecordRow[] firstPage = memory.getPage(0);
             if (firstPage[0].offset == RecordRow.nullOffset){
@@ -106,7 +107,7 @@ public class OvfArea {
 
         page[(int) ((offset%IdxSeqFile.pageSize) / RecordRow.size)].copyOnto(dest);
         return true;
-    };
+    }
     public boolean deleteRecord(int key,long offset){
 
         //if ()

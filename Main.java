@@ -18,6 +18,9 @@ public class Main {
         //myFile.printToConsole();
 
 
+        InteractiveMode im =  new InteractiveMode(true);
+        im.mainloop();
+
 
         PrintStream stdout = System.out;
         try {
@@ -46,7 +49,7 @@ public class Main {
 
         System.setOut(stdout);
 
-        //InteractiveMode app = new InteractiveMode(false);
+        //InteractiveMode app = new InteractiveMode(true);
 
         for(int testAlphab=1;testAlphab<5;testAlphab++)
             for(float testReorg=0.1f;testReorg<1;testReorg += 0.2f) {

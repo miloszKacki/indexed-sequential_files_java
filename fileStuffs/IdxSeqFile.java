@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class IdxSeqFile {
     public static final int pageSize = 100;
     public static int alphaB = 2;
-    public static float acceptableOvfProportion = 0.1f;
+    public static float acceptableOvfProportion = 2.0f;
     private PrimArea primary;
     //private RecTableFile primary;
     private OvfArea overflow;
@@ -68,13 +68,14 @@ public class IdxSeqFile {
             if (page[i].stateByte == RecordRow.EMPTY_STATE){
                 page[i] = rowToInsert;
                 primary.savePage(page,pageIdx);
-                if(i==0) appendToIdxs(rowToInsert.record.getKey());
+                if(i==0) appendToIdxs(rowToInsert.record.getKey()); //this happens if its the first record
                 return true;
             }
             if(rowToInsert.record.getKey() == page[i].record.getKey()){
                 return false;
             }
             if(page[i].record.getKey() > rowToInsert.record.getKey()){
+                //No, this won't happen on the firs iteration (if findPageIndexByKey() works)
                 if(page[i-1].offset == RecordRow.nullOffset) {
                     page[i - 1].offset = overflow.AppendRecRow(rowToInsert);
                     primary.savePage(page,pageIdx);
@@ -114,7 +115,6 @@ public class IdxSeqFile {
 
         saveIdxBuffer();
         indexes = new ArrayList<>();
-        //TODO do I even need old indexes? cant I just wipe them out? I did :3
 
         long idxPrimNew = 0, idxPrimOld=0;
         int idxOnPageNew = 0, idxOnPageOld=0;
@@ -199,7 +199,7 @@ public class IdxSeqFile {
 //
 //    }
     private static final int nullAtIdxTable = -1;
-    private static final int idxFilePgeSize = 3;
+    private static final int idxFilePgeSize = 4;
 
     //if key is bigger than the last from keyfile, the last page's index is returned
     //if key is smaller than the first from keyfile, is -1 returned
@@ -233,8 +233,7 @@ public class IdxSeqFile {
 
 
     private void copyIdxPage(int atIdx,int[] dest){
-        // shouldnt be useful btw
-        Arrays.fill(dest, nullAtIdxTable);
+        Arrays.fill(dest, nullAtIdxTable); // this line shouldn't be useful btw
 
         for(int i=0;i<dest.length;i++){
             if(atIdx+i >= indexes.size()) return;
