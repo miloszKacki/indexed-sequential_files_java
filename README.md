@@ -6,7 +6,9 @@ This project was written as an assignment for SBD(Struktury Baz Danych/ Database
 
 ## Console mode
 
-This program works in simplistic console mode. It can be set to (create and)read files with prepared sets of commands.
+This program works in simplistic console mode. 
+
+It can be set to (create and)read files with prepared sets of commands.
 Behaviour of the program is hardcoded in the Main class.
 
 > The InteractiveMode class will scan input like so:
