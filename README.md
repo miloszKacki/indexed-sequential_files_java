@@ -1,5 +1,6 @@
 # Indexed-sequential files
 Simple implementation of indexed-sequential file organisation with simulated page reading.
+It contains records representing parallelograms, sorted by key value.
 
 This project was written as an assignment for SBD(Struktury Baz Danych/ Database Structures) class.
 
