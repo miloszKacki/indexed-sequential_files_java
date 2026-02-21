@@ -11,9 +11,9 @@ Behaviour of the program is hardcoded in the Main class.
 
 > The InteractiveMode class will scan input like so:
 >
->     \>command
+>     >command
 >     arg1, arg2, ...
->     \>command
+>     >command
 >     arg1, arg2 ...
 >     ...
 
