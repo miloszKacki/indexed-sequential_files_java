@@ -20,7 +20,7 @@ The InteractiveMode class will scan input like so:
 
 newFile ; path - creates new IdxSeqFile(path) - there is no file by default, it has to be created before other commands can be executed.
 
-add ; ... - saves specified record to theIdxSeqFile
+add ; ... - saves specified record to the IdxSeqFile
 
 get ; key - gets record from the file and prints it to the console
 
