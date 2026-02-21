@@ -24,8 +24,8 @@ add ; ... - saves specified record to theIdxSeqFile
 
 get ; key - gets record from the file and prints it to the console
 
-printFile - prints out theIdxSeqFile
+printFile - prints out the IdxSeqFile
 
-reorg - reorganises theIdxSeqFile
+reorg - reorganises the IdxSeqFile
 
 counts - get the number of disc operations
