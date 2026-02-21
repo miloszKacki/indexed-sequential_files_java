@@ -17,9 +17,14 @@ The InteractiveMode class will scan input like so:
 
 ### Commands
 
-newFile ; path - creates new IdxSeqFile(path) - there is no file by default, it has to be created before other commands can be executed
+newFile ; path - creates new IdxSeqFile(path) - there is no file by default, it has to be created before other commands can be executed.
+
 add ; ... - saves specified record to theIdxSeqFile
+
 get ; key - gets record from the file and prints it to the console
+
 printFile - prints out theIdxSeqFile
+
 reorg - reorganises theIdxSeqFile
+
 counts - get the number of disc operations
