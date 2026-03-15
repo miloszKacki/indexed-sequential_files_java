@@ -15,6 +15,8 @@ It improves over the basic sequential file organisation by:
 Those things are achieved by storing a list of first keys on each disk page, which is faster to search through than the main area 
 and an overflow area, which allows us to add new records "in between" already stored records without reorganisation of the whole main area.
 
+![Inexed-sequential file organisation diagram](./images/Idx-SeqDiagram.png)
+
 ## Console mode
 
 This program works in mode. 
